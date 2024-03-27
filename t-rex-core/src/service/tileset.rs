@@ -58,9 +58,9 @@ impl Tileset {
         self.maxzoom.unwrap_or(
             self.layers
                 .iter()
-                .map(|l| l.maxzoom(22))
+                .map(|l| l.maxzoom(42))
                 .max()
-                .unwrap_or(22),
+                .unwrap_or(42),
         )
     }
     pub fn attribution(&self) -> String {
@@ -159,7 +159,7 @@ fn test_zoom() {
     };
 
     assert_eq!(tileset.minzoom(), 0);
-    assert_eq!(tileset.maxzoom(), 22);
+    assert_eq!(tileset.maxzoom(), 42);
 
     tileset.layers[0].maxzoom = Some(8);
     assert_eq!(tileset.maxzoom(), 8);

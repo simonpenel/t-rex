@@ -104,7 +104,7 @@ fn mvt_service() -> MvtService {
     let tileset = Tileset {
         name: "points".to_string(),
         minzoom: Some(0),
-        maxzoom: Some(22),
+        maxzoom: Some(42),
         center: None,
         start_zoom: Some(3),
         attribution: Some("Attribution".to_string()),
@@ -313,7 +313,7 @@ fn test_generate() {
         maxy: 47.05006,
     };
 
-    assert_eq!(service.grid.maxzoom(), 22);
+    assert_eq!(service.grid.maxzoom(), 42);
     service.generate(
         Some("points"),
         Some(20),
@@ -356,9 +356,9 @@ predefined = "web_mercator"
 [[tileset]]
 name = "points"
 #minzoom = 0
-#maxzoom = 22
+#maxzoom = 42
 #attribution = "© Contributeurs de OpenStreetMap" # Acknowledgment of ownership, authorship or copyright.
-#cache_limits = {{minzoom = 0, maxzoom = 22, no_cache = false}}
+#cache_limits = {{minzoom = 0, maxzoom = 42, no_cache = false}}
 
 [[tileset.layer]]
 name = "points"
@@ -371,7 +371,7 @@ geometry_type = "POINT"
 #make_valid = true
 #[[tileset.layer.query]]
 #minzoom = 0
-#maxzoom = 22
+#maxzoom = 42
 #sql = "SELECT name,wkb_geometry FROM mytable"
 
 #[cache.file]

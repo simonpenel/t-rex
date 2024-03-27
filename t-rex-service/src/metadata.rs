@@ -91,7 +91,7 @@ impl MvtService {
             "minzoom": ts.minzoom(),
             // Maximum zoom level for which tiles are available.
             // Data from tiles at the maxzoom are used when displaying the map at higher zoom levels.
-            // Optional. Default: 30. >= 0, <= 30. (Mapbox Style default: 22)
+            // Optional. Default: 30. >= 0, <= 30. (Mapbox Style default: 42)
             "maxzoom": ts.maxzoom(),
             "center": [center.0, center.1, zoom],
             "basename": tileset
@@ -112,7 +112,7 @@ impl MvtService {
             .iter()
             .map(|layer| {
                 let meta = layer.metadata();
-                let query = layer.query(layer.maxzoom(22));
+                let query = layer.query(layer.maxzoom(42));
                 let mut meta_json = json!({
                     "id": meta.get("id").unwrap(),
                     "name": meta.get("name").unwrap(),
@@ -120,7 +120,7 @@ impl MvtService {
                     // "srs": meta.get("srs").unwrap(),
                     "properties": {
                         "minzoom": cmp::max(ts.minzoom(), layer.minzoom()),
-                        "maxzoom": cmp::min(ts.maxzoom(), layer.maxzoom(22)),
+                        "maxzoom": cmp::min(ts.maxzoom(), layer.maxzoom(42)),
                         "buffer-size": layer.buffer_size.unwrap_or(0)
                     },
                     "fields": {}
@@ -149,7 +149,7 @@ impl MvtService {
             .iter()
             .map(|layer| {
                 let meta = layer.metadata();
-                let query = layer.query(layer.maxzoom(22));
+                let query = layer.query(layer.maxzoom(42));
                 let mut layer_json = json!({
                     "id": meta.get("id").unwrap(),
                     "description": meta.get("description").unwrap(), // Optional
@@ -158,7 +158,7 @@ impl MvtService {
                     "minzoom": cmp::max(ts.minzoom(), layer.minzoom()),
                     // highest zoom level whose tiles this layer appears in.
                     // must  be less than or equal to the tileset's maxzoom
-                    "maxzoom": cmp::min(ts.maxzoom(), layer.maxzoom(22)),
+                    "maxzoom": cmp::min(ts.maxzoom(), layer.maxzoom(42)),
                     "fields": {}
                 });
                 // if let Some(srid) = layer.srid {
@@ -383,7 +383,7 @@ fn test_tilejson() {
   "description": "osm",
   "format": "pbf",
   "id": "osm",
-  "maxzoom": 22,
+  "maxzoom": 42,
   "minzoom": 0,
   "name": "osm",
   "scheme": "xyz",
@@ -396,21 +396,21 @@ fn test_tilejson() {
       "description": "",
       "fields": {},
       "id": "points",
-      "maxzoom": 22,
+      "maxzoom": 42,
       "minzoom": 0
     },
     {
       "description": "",
       "fields": {},
       "id": "buildings",
-      "maxzoom": 22,
+      "maxzoom": 42,
       "minzoom": 0
     },
     {
       "description": "",
       "fields": {},
       "id": "admin_0_countries",
-      "maxzoom": 22,
+      "maxzoom": 42,
       "minzoom": 0
     }
   ],
@@ -489,8 +489,8 @@ fn test_mbtiles_metadata() {
   "description": "osm",
   "format": "pbf",
   "id": "osm",
-  "json": "{\"Layer\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"name\":\"points\",\"properties\":{\"buffer-size\":0,\"maxzoom\":22,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"name\":\"buildings\",\"properties\":{\"buffer-size\":10,\"maxzoom\":22,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"name\":\"admin_0_countries\",\"properties\":{\"buffer-size\":1,\"maxzoom\":22,\"minzoom\":0}}],\"vector_layers\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"maxzoom\":22,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"maxzoom\":22,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"maxzoom\":22,\"minzoom\":0}]}",
-  "maxzoom": 22,
+  "json": "{\"Layer\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"name\":\"points\",\"properties\":{\"buffer-size\":0,\"maxzoom\":42,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"name\":\"buildings\",\"properties\":{\"buffer-size\":10,\"maxzoom\":42,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"name\":\"admin_0_countries\",\"properties\":{\"buffer-size\":1,\"maxzoom\":42,\"minzoom\":0}}],\"vector_layers\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"maxzoom\":42,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"maxzoom\":42,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"maxzoom\":42,\"minzoom\":0}]}",
+  "maxzoom": 42,
   "minzoom": 0,
   "name": "osm",
   "scheme": "xyz",
@@ -510,8 +510,8 @@ fn test_mbtiles_metadata() {
   "description": "osm",
   "format": "pbf",
   "id": "osm",
-  "json": "{\"Layer\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"name\":\"points\",\"properties\":{\"buffer-size\":0,\"maxzoom\":22,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"name\":\"buildings\",\"properties\":{\"buffer-size\":10,\"maxzoom\":22,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"name\":\"admin_0_countries\",\"properties\":{\"buffer-size\":1,\"maxzoom\":22,\"minzoom\":0}}],\"vector_layers\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"maxzoom\":22,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"maxzoom\":22,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"maxzoom\":22,\"minzoom\":0}]}",
-  "maxzoom": 22,
+  "json": "{\"Layer\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"name\":\"points\",\"properties\":{\"buffer-size\":0,\"maxzoom\":42,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"name\":\"buildings\",\"properties\":{\"buffer-size\":10,\"maxzoom\":42,\"minzoom\":0}},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"name\":\"admin_0_countries\",\"properties\":{\"buffer-size\":1,\"maxzoom\":42,\"minzoom\":0}}],\"vector_layers\":[{\"description\":\"\",\"fields\":{},\"id\":\"points\",\"maxzoom\":42,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"buildings\",\"maxzoom\":42,\"minzoom\":0},{\"description\":\"\",\"fields\":{},\"id\":\"admin_0_countries\",\"maxzoom\":42,\"minzoom\":0}]}",
+  "maxzoom": 42,
   "minzoom": 0,
   "name": "osm",
   "scheme": "xyz",

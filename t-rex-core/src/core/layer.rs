@@ -80,7 +80,7 @@ impl Layer {
         let mut queries = self
             .query
             .iter()
-            .map(|q| (q.minzoom, q.maxzoom.unwrap_or(22), q))
+            .map(|q| (q.minzoom, q.maxzoom.unwrap_or(42), q))
             .collect::<Vec<_>>();
         queries.sort_by_key(|ref t| t.0);
         // Start at highest zoom level and find first match
@@ -116,7 +116,7 @@ impl Layer {
         metadata.insert("description", "".to_string());
         metadata.insert("buffer-size", self.buffer_size.unwrap_or(0).to_string());
         metadata.insert("minzoom", self.minzoom().to_string());
-        metadata.insert("maxzoom", self.maxzoom(22).to_string());
+        metadata.insert("maxzoom", self.maxzoom(42).to_string());
         //metadata.insert("srs", "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over".to_string());
         metadata
     }
@@ -170,9 +170,9 @@ impl<'a> Config<'a, LayerCfg> for Layer {
 [[tileset]]
 name = "points"
 #minzoom = 0
-#maxzoom = 22
+#maxzoom = 42
 #attribution = "© Contributeurs de OpenStreetMap" # Acknowledgment of ownership, authorship or copyright.
-#cache_limits = {minzoom = 0, maxzoom = 22, no_cache = false}
+#cache_limits = {minzoom = 0, maxzoom = 42, no_cache = false}
 
 [[tileset.layer]]
 name = "points"
@@ -185,7 +185,7 @@ geometry_type = "POINT"
 #make_valid = true
 #[[tileset.layer.query]]
 #minzoom = 0
-#maxzoom = 22
+#maxzoom = 42
 #sql = "SELECT name,wkb_geometry FROM mytable"
 "#;
         toml.to_string()

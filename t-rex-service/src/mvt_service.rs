@@ -276,7 +276,7 @@ impl MvtService {
             ]
             .iter()
             .min()
-            .unwrap_or(&22);
+            .unwrap_or(&42);
             if minzoom.is_some() && minzoom.unwrap() < ts_minzoom {
                 warn!("Skipping zoom levels <{}", ts_minzoom);
             }
@@ -439,7 +439,7 @@ impl MvtService {
             ]
             .iter()
             .min()
-            .unwrap_or(&22);
+            .unwrap_or(&42);
 
             let mut pb =
                 self.progress_bar_drilldown(ts_maxzoom - ts_minzoom + 1, points.len() as u64 / 2);

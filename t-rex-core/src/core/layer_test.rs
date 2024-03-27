@@ -105,7 +105,7 @@ fn test_zoom_config() {
         "#;
     let cfg = layer_from_config(toml).unwrap();
     assert_eq!(cfg.minzoom(), 1);
-    assert_eq!(cfg.maxzoom(22), 12);
+    assert_eq!(cfg.maxzoom(42), 12);
 
     // min/maxzoom override query limits
     let toml = r#"
@@ -126,7 +126,7 @@ fn test_zoom_config() {
         "#;
     let cfg = layer_from_config(toml).unwrap();
     assert_eq!(cfg.minzoom(), 1);
-    assert_eq!(cfg.maxzoom(22), 12);
+    assert_eq!(cfg.maxzoom(42), 12);
 
     // handle empty query limits
     let toml = r#"
@@ -145,7 +145,7 @@ fn test_zoom_config() {
         "#;
     let cfg = layer_from_config(toml).unwrap();
     assert_eq!(cfg.minzoom(), 0);
-    assert_eq!(cfg.maxzoom(22), 14);
+    assert_eq!(cfg.maxzoom(42), 14);
     assert_eq!(
         cfg.query(1),
         Some(&"SELECT name,wkb_geometry FROM places_z2".to_string())
@@ -179,7 +179,7 @@ fn test_zoom_config() {
         "#;
     let cfg = layer_from_config(toml).unwrap();
     assert_eq!(cfg.minzoom(), 0);
-    assert_eq!(cfg.maxzoom(22), 22);
+    assert_eq!(cfg.maxzoom(42), 42);
     assert_eq!(
         cfg.query(1),
         Some(&"SELECT name,wkb_geometry FROM places_z2".to_string())

@@ -696,7 +696,7 @@ impl DatasourceType for PostgisDatasource {
             error!("Layer '{}': table_name undefined", layer.name);
         }
 
-        for zoom in layer.minzoom()..=layer.maxzoom(22) {
+        for zoom in layer.minzoom()..=layer.maxzoom(42) {
             let layer_query = layer.query(zoom);
             if let Some(query) = self.build_query(layer, grid_srid, zoom, layer_query) {
                 debug!("Query for layer '{}': {}", layer.name, query.sql);
