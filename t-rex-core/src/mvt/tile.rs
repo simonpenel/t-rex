@@ -165,7 +165,6 @@ impl<'a> Tile<'a> {
         if self.reverse_y {
             screen_geom.y = self.tile_size.saturating_sub(screen_geom.y)
         }
-        println!("\n\n\n>==================================\ndebug point {} {}",screen_geom.x,screen_geom.y);
 
         screen_geom
     }
