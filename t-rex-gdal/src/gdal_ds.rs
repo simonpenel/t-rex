@@ -223,7 +223,7 @@ impl DatasourceType for GdalDatasource {
         let layer_name = layer.table_name.as_ref().unwrap();
         debug!("retrieve_features layer: {}", layer_name);
         let mut ogr_layer = dataset.layer_by_name(layer_name).unwrap();
-
+        println!("Debug Simon GDAL{:?}", layer.buffer_size);
         let mut bbox_extent = if let Some(pixels) = layer.buffer_size {
             let pixel_width = grid.pixel_width(zoom);
             let buf = f64::from(pixels) * pixel_width;
