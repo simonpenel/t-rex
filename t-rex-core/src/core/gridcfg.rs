@@ -55,6 +55,7 @@ impl<'a> Config<'a, GridCfg> for Grid {
                 usergrid.resolutions.clone(),
                 origin?,
             );
+            println!("\n\n*******************\nCHECKING RESOLUTION: {:?}",usergrid.resolutions.clone());
             Ok(grid)
         } else {
             Err("Invalid grid definition".to_string())
