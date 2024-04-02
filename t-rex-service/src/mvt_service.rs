@@ -171,7 +171,7 @@ impl MvtService {
         // Request tile and write into cache
         let mvt_tile = self.tile(tileset, xtile, y, zoom, stats);
         // Spec: A Vector Tile SHOULD contain at least one layer.
-        if mvt_tile.get_layers().len() > 0 {
+        if mvt_tile.get_layers().len() >0 {
             let tilegz = Tile::tile_bytevec_gz(&mvt_tile);
             if ts.is_cachable_at(zoom) {
                 if let Err(ioerr) = self.cache.write(&path, &tilegz) {
@@ -189,6 +189,7 @@ impl MvtService {
             // When serving from file cache return 204 No Content
             // Nginx: try_files $uri = 204;
             debug!("{} - Skipping empty tile", path);
+            println!("Debug Simon Skipping empty tile {}", path);
             None
         }
     }
@@ -530,6 +531,7 @@ impl<'a> Config<'a, ApplicationCfg> for MvtService {
     fn from_config(config: &ApplicationCfg) -> Result<Self, String> {
         let datasources = Datasources::from_config(config)?;
         let grid = Grid::from_config(&config.grid)?;
+        println!("DEBUG Simon {:?}",grid);
         let tilesets = config
             .tilesets
             .iter()
