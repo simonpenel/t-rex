@@ -189,7 +189,6 @@ impl MvtService {
             // When serving from file cache return 204 No Content
             // Nginx: try_files $uri = 204;
             debug!("{} - Skipping empty tile", path);
-            println!("Debug Simon Skipping empty tile {}", path);
             None
         }
     }
