@@ -108,9 +108,9 @@ fn generate(args: &ArgMatches<'_>) {
     service.generate(
         tileset,
         //minzoom,
-        29,
+        Some(29),
         //maxzoom,
-        30,
+        Some(30),
         extent,
         nodes,
         nodeno,
