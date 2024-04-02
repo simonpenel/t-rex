@@ -107,8 +107,10 @@ fn generate(args: &ArgMatches<'_>) {
     service.prepare_feature_queries();
     service.generate(
         tileset,
-        minzoom,
-        maxzoom,
+        //minzoom,
+        29,
+        //maxzoom,
+        30,
         extent,
         nodes,
         nodeno,
