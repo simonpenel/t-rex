@@ -267,7 +267,7 @@ impl MvtService {
 
             let tolerance = 0;
             let limits = self.grid.tile_limits(ext_proj, tolerance);
-
+            println!("Debug Simon 2 {:?}", limits);
             let ts_minzoom = cmp::max(tileset.minzoom(), minzoom.unwrap_or(0));
             let ts_maxzoom = *[
                 tileset.maxzoom(),
