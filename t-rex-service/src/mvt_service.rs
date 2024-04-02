@@ -267,7 +267,34 @@ impl MvtService {
 
             let tolerance = 0;
             let limits = self.grid.tile_limits(ext_proj, tolerance);
-            println!("Debug Simon 2 {:?}", limits);
+            println!("Debug Simon 2 all level  = {:?}", limits);
+            println!("Debug Simon 2 level 0 = {:?}", limits[0]);
+            println!("Debug Simon 2 level 1 = {:?}", limits[1]);
+            println!("Debug Simon 2 level 2 = {:?}", limits[2]);
+            println!("Debug Simon 2 level 3  = {:?}", limits[3]);
+            println!("Debug Simon 2 level 4  = {:?}", limits[4]);
+            println!("Debug Simon 2 level 5  = {:?}", limits[5]);
+            println!("Debug Simon 2 level 9  = {:?}", limits[9]);
+            println!("Debug Simon 2 level 10  = {:?}", limits[10]);
+            println!("Debug Simon 2 level 11  = {:?}", limits[11]);
+            println!("Debug Simon 2 level 12  = {:?}", limits[12]);
+            println!("Debug Simon 2 level 13  = {:?}", limits[13]);
+            println!("Debug Simon 2 level 26  = {:?}", limits[26]);
+            println!("Debug Simon 2 level 27  = {:?}", limits[27]);
+            println!("Debug Simon 2 level 28  = {:?}", limits[28]);
+            println!("Debug Simon 2 level 29  = {:?}", limits[29]);
+            println!("Debug Simon 2 level 30  = {:?}", limits[30]);
+            println!("Debug Simon 2 level 31  = {:?}", limits[31]);
+            println!("Debug Simon 2 level 32  = {:?}", limits[32]);
+            println!("Debug Simon 2 level 33  = {:?}", limits[33]);
+            println!("Debug Simon 2 level 34  = {:?}", limits[34]);
+            println!("Debug Simon 2 level 35  = {:?}", limits[35]);
+            println!("Debug Simon 2 level 36  = {:?}", limits[36]);
+            println!("Debug Simon 2 level 37  = {:?}", limits[37]);
+
+            println!("Debug Simon 2 level 40  = {:?}", limits[40]);
+
+
             let ts_minzoom = cmp::max(tileset.minzoom(), minzoom.unwrap_or(0));
             let ts_maxzoom = *[
                 tileset.maxzoom(),
