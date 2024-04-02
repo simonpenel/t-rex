@@ -152,6 +152,7 @@ impl<'a> Tile<'a> {
         self.buffer_size = layer.buffer_size.unwrap_or(0) as i32;
         self.pixel_size_x = (self.extent.maxx - self.extent.minx) / self.tile_size as f64;
         self.pixel_size_y = (self.extent.maxy - self.extent.miny) / self.tile_size as f64;
+        println!("\n\n\n************************\ndebug calc_layer_values s={} b={} x={} y={}",self.tile_size,self.buffer_size,self.pixel_size_x,self.pixel_size_y);
     }
 
     pub fn point(&self, point: &geom::Point) -> screen::Point {
@@ -159,9 +160,13 @@ impl<'a> Tile<'a> {
             x: ((point.x - self.extent.minx) / self.pixel_size_x) as i32,
             y: ((point.y - self.extent.miny) / self.pixel_size_y) as i32,
         };
+         println!("\n\n\n===================================\ndebug point {} {}",screen_geom.x,screen_geom.y);
+
         if self.reverse_y {
             screen_geom.y = self.tile_size.saturating_sub(screen_geom.y)
         }
+        println!("\n\n\n>==================================\ndebug point {} {}",screen_geom.x,screen_geom.y);
+
         screen_geom
     }
 
