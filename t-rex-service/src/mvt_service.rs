@@ -457,6 +457,7 @@ impl MvtService {
 
                 let tolerance = 0;
                 let limits = self.grid.tile_limits(ext_proj, tolerance);
+                println!("Debug Simon  {:?}", zoom, limits);
                 for zoom in ts_minzoom..=ts_maxzoom {
                     let ref limit = limits[zoom as usize];
                     debug!("level {}: {:?}", zoom, limit);
