@@ -722,11 +722,13 @@ impl DatasourceType for PostgisDatasource {
     where
         F: FnMut(&dyn Feature),
     {
+        println!("\n\nSIMON tileset = {}\n\n",&tileset);
         let conn = self.conn();
         if let Err(err) = conn {
             error!("Connection pool error while retrieving features: {}", err);
             return 0;
         }
+        println!("Degug Simon retrieve_feature");
         let mut conn = conn.unwrap();
         let query = self.query(&tileset.to_string(), &layer.name, zoom);
         if query.is_none() {
@@ -743,7 +745,9 @@ impl DatasourceType for PostgisDatasource {
         // Add query params
         let zoom_param = zoom as i32;
         let pixel_width = grid.pixel_width(zoom); // correct: * 256.0 / layer.tile_size as f64;
+        println!("\ndebug SIMON pixel_width = {:.}\n",pixel_width);
         let scale_denominator = grid.scale_denominator(zoom);
+        println!("\ndebug SIMON scale_denominator = {}\n",scale_denominator);
         let mut params = Vec::new();
         for param in &query.params {
             match param {
@@ -763,10 +767,17 @@ impl DatasourceType for PostgisDatasource {
         let stmt = stmt.unwrap();
         let mut trans = conn.transaction().expect("transaction already active");
         trace!("Query: {}", &query.sql);
+
+        println!("\n\n\nDebug query = {}\n\n",&query.sql);
+
+        println!("\n\n\nDebug params = {:?}\n\n",&params);
         trace!("Param values: {:?}", &params);
         let rows = trans
             .bind(&stmt, params.as_slice())
             .and_then(|portal| trans.query_portal(&portal, -1));
+
+        println!("\n\n\nDebug row = {:?}\n\n",&rows);
+
         if let Err(err) = rows {
             error!("Layer '{}': {}", layer.name, err);
             error!("Query: {}", query.sql);
@@ -775,12 +786,15 @@ impl DatasourceType for PostgisDatasource {
             return 0;
         }
         debug!("Reading features in layer {}", layer.name);
+        println!("DEBUG SIMON QUERY");
         let mut cnt = 0;
         let query_limit = layer.query_limit.unwrap_or(0);
+        println!("\n\ndebug query limit = {}\n\n",query_limit);
         for row in rows.unwrap() {
             let feature = FeatureRow { layer, row: &row };
             read(&feature);
             cnt += 1;
+
             if cnt == query_limit as u64 {
                 info!(
                     "Features of layer {} limited to {} (tile query_limit reached, zoom level {})",
