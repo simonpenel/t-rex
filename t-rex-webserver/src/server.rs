@@ -120,7 +120,7 @@ async fn tileset_metadata_json(
 async fn tile_pbf(
     config: web::Data<ApplicationCfg>,
     service: web::Data<MvtService>,
-    params: web::Path<(String, u8, u32, u32)>,
+    params: web::Path<(String, u8, u64, u64)>,
     req: HttpRequest,
 ) -> Result<HttpResponse> {
     let params = params.into_inner();

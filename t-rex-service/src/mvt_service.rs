@@ -76,8 +76,8 @@ impl MvtService {
     pub fn tile(
         &self,
         tileset: &str,
-        xtile: u32,
-        ytile: u32,
+        xtile: u64,
+        ytile: u64,
         zoom: u8,
         mut stats: Option<&mut Statistics>,
     ) -> vector_tile::Tile {
@@ -127,8 +127,8 @@ impl MvtService {
     pub fn tile_cached(
         &self,
         tileset: &str,
-        xtile: u32,
-        ytile: u32,
+        xtile: u64,
+        ytile: u64,
         zoom: u8,
         gzip: bool,
         stats: Option<&mut Statistics>,
@@ -378,7 +378,7 @@ impl MvtService {
                     // rust-postgres starts its own Tokio runtime
                     // without spawn_blocking or block_in_place we get 'Cannot start a runtime from within a runtime'
                     let mvt_tile = task::spawn_blocking(move || {
-                        svc.tile(&tileset_name, xtile as u32, ytile as u32, zoom, None)
+                        svc.tile(&tileset_name, xtile as u64, ytile as u64, zoom, None)
                     })
                     .await
                     .unwrap();
@@ -492,8 +492,8 @@ impl MvtService {
                     let ytile = limit.miny;
                     let mvt_tile = self.tile(
                         &tileset.name,
-                        xtile as u32,
-                        ytile as u32,
+                        xtile as u64,
+                        ytile as u64,
                         zoom,
                         Some(&mut stats),
                     );
