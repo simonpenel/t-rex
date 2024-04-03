@@ -268,7 +268,7 @@ impl MvtService {
             let tolerance = 0;
             let limits = self.grid.tile_limits(ext_proj, tolerance);
             println!("Debug Simon 2 all level  = {:?}", limits);
-            println!("Debug Simon 2 level 0 = {:?}", limits[0]);
+            println!("Debug Simon 2 level 0 = {:?} srid = {:?}", limits[0], extent_srid);
             println!("Debug Simon 2 level 1 = {:?}", limits[1]);
             println!("Debug Simon 2 level 2 = {:?}", limits[2]);
             println!("Debug Simon 2 level 3  = {:?}", limits[3]);
@@ -292,7 +292,7 @@ impl MvtService {
             println!("Debug Simon 2 level 36  = {:?}", limits[36]);
             println!("Debug Simon 2 level 37  = {:?}", limits[37]);
 
-            println!("Debug Simon 2 level 40  = {:?}", limits[40]);
+            println!("Debug Simon 2 level 40  = {:?} srid = {:?}", limits[40], extent_srid);
 
 
             let ts_minzoom = cmp::max(tileset.minzoom(), minzoom.unwrap_or(0));
